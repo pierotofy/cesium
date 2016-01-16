@@ -15,24 +15,30 @@ body {
 .cesium-infoBox-description a:visited,
 .cesium-infoBox-description a:hover,
 .cesium-infoBox-description a:active {
-    color: #F7F7F7;
+    color: #000;
 }
 
 .cesium-infoBox-description table {
-    color: #F7F7F7;
+    color: #000;
+    border-spacing:0; /* Removes the cell spacing via CSS */
+    border-collapse: collapse;  /* Optional - if you don't want to have double border where cells touch */
+}
+
+.cesium-infoBox-description table td{
+    padding: 6px;
 }
 
 .cesium-infoBox-defaultTable {
     width: 100%;
-    color: #F7F7F7;
+    color: #000;
 }
 
 .cesium-infoBox-defaultTable tr:nth-child(odd) {
-    background-color: rgba(84, 84, 84, 0.8);
+    background-color: #F7F7F7;
 }
 
 .cesium-infoBox-defaultTable tr:nth-child(even) {
-    background-color: rgba(84, 84, 84, 0.25);
+    background-color: #EEEEEE;
 }
 
 .cesium-infoBox-defaultTable th {
