@@ -7,25 +7,25 @@ body {
 .cesium-infoBox-description {
     font-family: sans-serif;
     font-size: 13px;
-    padding: 4px 10px;
+    padding: 0;
     margin-right: 4px;
-    color: #edffff;
+    color: #F7F7F7;
 }
 
 .cesium-infoBox-description a:link,
 .cesium-infoBox-description a:visited,
 .cesium-infoBox-description a:hover,
 .cesium-infoBox-description a:active {
-    color: #edffff;
+    color: #F7F7F7;
 }
 
 .cesium-infoBox-description table {
-    color: #edffff;
+    color: #F7F7F7;
 }
 
 .cesium-infoBox-defaultTable {
     width: 100%;
-    color: #edffff;
+    color: #F7F7F7;
 }
 
 .cesium-infoBox-defaultTable tr:nth-child(odd) {
