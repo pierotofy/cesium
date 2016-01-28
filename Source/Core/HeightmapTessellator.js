@@ -1,5 +1,6 @@
 /*global define*/
 define([
+        './AttributeCompression',
         './AxisAlignedBoundingBox',
         './BoundingSphere',
         './Cartesian2',
@@ -17,6 +18,7 @@ define([
         './TerrainEncoding',
         './Transforms'
     ], function(
+        AttributeCompression,
         AxisAlignedBoundingBox,
         BoundingSphere,
         Cartesian2,
@@ -233,6 +235,7 @@ define([
         var positions = new Array(size);
         var heights = new Array(size);
         var uvs = new Array(size);
+        var normals = new Array(size);
 
         var startRow = 0;
         var endRow = height;
@@ -247,7 +250,6 @@ define([
         }
 
         var index = 0;
-
         for (var rowIndex = startRow; rowIndex < endRow; ++rowIndex) {
             var row = rowIndex;
             if (row < 0) {
@@ -339,6 +341,11 @@ define([
                 positions[index] = position;
                 heights[index] = heightSample;
 
+                var normal = new Cartesian3(Math.random(), Math.random(), Math.random());
+                Cartesian3.normalize(normal, normal);
+                normals[index] = new Cartesian2();
+                AttributeCompression.octEncode(normal, normals[index]);
+
                 var u = (longitude - geographicWest) / (geographicEast - geographicWest);
                 u = CesiumMath.clamp(u, 0.0, 1.0);
                 uvs[index] = new Cartesian2(u, v);
@@ -369,12 +376,12 @@ define([
         }
 
         var aaBox = new AxisAlignedBoundingBox(minimum, maximum, relativeToCenter);
-        var encoding = new TerrainEncoding(aaBox, hMin, maximumHeight, fromENU, false);
+        var encoding = new TerrainEncoding(aaBox, hMin, maximumHeight, fromENU, true);
         var vertices = new Float32Array(size * encoding.getStride());
 
         var bufferIndex = 0;
         for (var j = 0; j < size; ++j) {
-            bufferIndex = encoding.encode(vertices, bufferIndex, positions[j], uvs[j], heights[j]);
+            bufferIndex = encoding.encode(vertices, bufferIndex, positions[j], uvs[j], heights[j], normals[j]);
         }
 
         return {
