@@ -55,7 +55,7 @@ defineSuite([
         VerticalOrigin,
         pollToPromise,
         when) {
-    "use strict";
+    'use strict';
 
     function makePacket(packet) {
         return [{
@@ -657,6 +657,22 @@ defineSuite([
 
         dataSource.load(makePacket(czml));
         entity = dataSource.entities.values[0];
+        expect(entity.position.referenceFrame).toBe(ReferenceFrame.FIXED);
+    });
+
+    it('uses FIXED as default if not specified in CZML', function() {
+        var epoch = JulianDate.now();
+        var dataSource = new CzmlDataSource();
+
+        var czml = {
+            position : {
+                epoch : JulianDate.toIso8601(epoch),
+                cartesian : [1.0, 2.0, 3.0]
+            }
+        };
+
+        dataSource.load(makePacket(czml));
+        var entity = dataSource.entities.values[0];
         expect(entity.position.referenceFrame).toBe(ReferenceFrame.FIXED);
     });
 

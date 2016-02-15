@@ -83,7 +83,7 @@ define([
         Imagery,
         ImageryState,
         TileImagery) {
-    "use strict";
+    'use strict';
 
     /**
      * An imagery layer that displays tiled image data from a single imagery provider
@@ -344,7 +344,7 @@ define([
      *
      * @example
      * imageryLayer = imageryLayer && imageryLayer.destroy();
-     * 
+     *
      * @see ImageryLayer#isDestroyed
      */
     ImageryLayer.prototype.destroy = function() {
@@ -354,6 +354,28 @@ define([
     var imageryBoundsScratch = new Rectangle();
     var tileImageryBoundsScratch = new Rectangle();
     var clippedRectangleScratch = new Rectangle();
+
+    /**
+     * Computes the intersection of this layer's rectangle with the imagery provider's availability rectangle,
+     * producing the overall bounds of imagery that can be produced by this layer.
+     *
+     * @returns {Promise} A promise to a rectangle which defines the overall bounds of imagery that can be produced by this layer.
+     *
+     * @example
+     * // Zoom to an imagery layer.
+     * imageryLayer.getViewableRectangle().then(function (rectangle) {
+     *     return camera.flyTo({
+     *         destination: rectangle
+     *     });
+     * });
+     */
+    ImageryLayer.prototype.getViewableRectangle = function() {
+        var imageryProvider = this._imageryProvider;
+        var rectangle = this._rectangle;
+        return imageryProvider.readyPromise.then(function() {
+            return Rectangle.intersection(imageryProvider.rectangle, rectangle);
+        });
+    };
 
     /**
      * Create skeletons for the imagery tiles that partially or completely overlap a given terrain

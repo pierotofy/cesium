@@ -27,7 +27,7 @@ define([
         GeometryAttributes,
         IndexDatatype,
         PrimitiveType) {
-    "use strict";
+    'use strict';
 
     var radiusScratch = new Cartesian2();
 
@@ -51,8 +51,6 @@ define([
      * @exception {DeveloperError} options.slices must be greater that 3.
      *
      * @see CylinderOutlineGeometry.createGeometry
-     *
-     * @demo {@link http://cesiumjs.org/Cesium/Apps/Sandcastle/index.html?src=Cylinder%20Outline.html|Cesium Sandcastle Cylinder Outline Demo}
      *
      * @example
      * // create cylinder geometry

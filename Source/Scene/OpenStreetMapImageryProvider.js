@@ -23,7 +23,7 @@ define([
         WebMercatorTilingScheme,
         when,
         ImageryProvider) {
-    "use strict";
+    'use strict';
 
     var trailingSlashRegex = /\/$/;
     var defaultCredit = new Credit('MapQuest, Open Street Map and contributors, CC-BY-SA');
@@ -51,7 +51,7 @@ define([
      * @see BingMapsImageryProvider
      * @see GoogleEarthImageryProvider
      * @see SingleTileImageryProvider
-     * @see TileMapServiceImageryProvider
+     * @see createTileMapServiceImageryProvider
      * @see WebMapServiceImageryProvider
      * @see WebMapTileServiceImageryProvider
      * @see UrlTemplateImageryProvider

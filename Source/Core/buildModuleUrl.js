@@ -11,7 +11,7 @@ define([
         DeveloperError,
         getAbsoluteUri,
         require) {
-    "use strict";
+    'use strict';
     /*global CESIUM_BASE_URL*/
 
     var cesiumScriptRegex = /((?:.*\/)|^)cesium[\w-]*\.js(?:\W|$)/i;
@@ -44,7 +44,7 @@ define([
             throw new DeveloperError('Unable to determine Cesium base URL automatically, try defining a global variable called CESIUM_BASE_URL.');
         }
 
-        baseUrl = getAbsoluteUri(baseUrlString);
+        baseUrl = new Uri(getAbsoluteUri(baseUrlString));
 
         return baseUrl;
     }

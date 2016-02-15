@@ -9,6 +9,7 @@ defineSuite([
         'Renderer/ComputeEngine',
         'Scene/ArcGisMapServerImageryProvider',
         'Scene/BingMapsImageryProvider',
+        'Scene/createTileMapServiceImageryProvider',
         'Scene/Globe',
         'Scene/GlobeSurfaceTile',
         'Scene/Imagery',
@@ -17,7 +18,6 @@ defineSuite([
         'Scene/NeverTileDiscardPolicy',
         'Scene/QuadtreeTile',
         'Scene/SingleTileImageryProvider',
-        'Scene/TileMapServiceImageryProvider',
         'Scene/WebMapServiceImageryProvider',
         'Specs/createContext',
         'Specs/createFrameState',
@@ -32,6 +32,7 @@ defineSuite([
         ComputeEngine,
         ArcGisMapServerImageryProvider,
         BingMapsImageryProvider,
+        createTileMapServiceImageryProvider,
         Globe,
         GlobeSurfaceTile,
         Imagery,
@@ -40,12 +41,11 @@ defineSuite([
         NeverTileDiscardPolicy,
         QuadtreeTile,
         SingleTileImageryProvider,
-        TileMapServiceImageryProvider,
         WebMapServiceImageryProvider,
         createContext,
         createFrameState,
         pollToPromise) {
-    "use strict";
+    'use strict';
 
     var context;
     var frameState;
@@ -237,9 +237,26 @@ defineSuite([
         });
     });
 
+    it('getViewableRectangle works', function() {
+        var providerRectangle = Rectangle.fromDegrees(8.2, 61.09, 8.5, 61.7);
+        var provider = new SingleTileImageryProvider({
+            url : 'Data/Images/Green4x4.png',
+            rectangle : providerRectangle
+        });
+
+        var layerRectangle = Rectangle.fromDegrees(7.2, 60.9, 9.0, 61.7);
+        var layer = new ImageryLayer(provider, {
+            rectangle : layerRectangle
+        });
+
+        return layer.getViewableRectangle().then(function(rectangle) {
+            expect(rectangle).toEqual(Rectangle.intersection(providerRectangle, layerRectangle));
+        });
+    });
+
     describe('createTileImagerySkeletons', function() {
         it('handles a base layer that does not cover the entire globe', function() {
-            var provider = new TileMapServiceImageryProvider({
+            var provider = createTileMapServiceImageryProvider({
                 url : 'Data/TMS/SmallArea'
             });
 
@@ -288,7 +305,7 @@ defineSuite([
                 url : 'Data/Images/Blue.png'
             });
 
-            var provider = new TileMapServiceImageryProvider({
+            var provider = createTileMapServiceImageryProvider({
                 url : 'Data/TMS/SmallArea'
             });
 
@@ -334,7 +351,7 @@ defineSuite([
                 url : 'Data/Images/Green4x4.png'
             });
 
-            var provider = new TileMapServiceImageryProvider({
+            var provider = createTileMapServiceImageryProvider({
                 url : 'Data/TMS/SmallArea'
             });
 

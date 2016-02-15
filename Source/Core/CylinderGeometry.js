@@ -31,7 +31,7 @@ define([
         CesiumMath,
         PrimitiveType,
         VertexFormat) {
-    "use strict";
+    'use strict';
 
     var radiusScratch = new Cartesian2();
     var normalScratch = new Cartesian3();
@@ -60,8 +60,6 @@ define([
      * @exception {DeveloperError} options.slices must be greater that 3.
      *
      * @see CylinderGeometry.createGeometry
-     *
-     * @demo {@link http://cesiumjs.org/Cesium/Apps/Sandcastle/index.html?src=Cylinder.html|Cesium Sandcastle Cylinder Demo}
      *
      * @example
      * // create cylinder geometry

@@ -33,7 +33,7 @@ define([
         PrimitiveType,
         Queue,
         WindingOrder) {
-    "use strict";
+    'use strict';
 
     var uScratch = new Cartesian2();
     var vScratch = new Cartesian2();
@@ -978,10 +978,12 @@ define([
                     p = ellipsoid.scaleToGeodeticSurface(p, p);
                 }
 
-                n = ellipsoid.geodeticSurfaceNormal(p, n);
+                if (height !== 0) {
+                    n = ellipsoid.geodeticSurfaceNormal(p, n);
 
-                Cartesian3.multiplyByScalar(n, height, n);
-                Cartesian3.add(p, n, p);
+                    Cartesian3.multiplyByScalar(n, height, n);
+                    Cartesian3.add(p, n, p);
+                }
 
                 positions[i] = p.x;
                 positions[i + 1] = p.y;

@@ -31,7 +31,7 @@ define([
         CesiumMath,
         PrimitiveType,
         VertexFormat) {
-    "use strict";
+    'use strict';
 
     var scratchPosition = new Cartesian3();
     var scratchNormal = new Cartesian3();
@@ -59,8 +59,6 @@ define([
      * @exception {DeveloperError} options.stackPartitions cannot be less than three.
      *
      * @see EllipsoidGeometry#createGeometry
-     *
-     * @demo {@link http://cesiumjs.org/Cesium/Apps/Sandcastle/index.html?src=Ellipsoid.html|Cesium Sandcastle Ellipsoid Demo}
      *
      * @example
      * var ellipsoid = new Cesium.EllipsoidGeometry({
